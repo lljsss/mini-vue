@@ -1,4 +1,4 @@
 import { add } from '../index'
-it('init', () => {
+test('init', () => {
   expect(add(1, 2)).toBe(3)
 })
