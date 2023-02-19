@@ -17,6 +17,9 @@ export function readonly(raw) {
 export function shallowReadonly(raw) {
   return createReactiveObject(raw, shallowReadonlyHandlers)
 }
+export function isProxy(raw) {
+  return isReactive(raw) || isReadonly(raw)
+}
 export function isReadonly(value) {
   return !!value[ReactiveFlags.IS_READONLY]
 }
