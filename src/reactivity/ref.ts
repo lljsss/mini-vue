@@ -6,6 +6,7 @@ class RefImpl {
   private _value: any
   public dep
   private _rawValue: any
+  public __v__isRef = true
   constructor(value) {
     this._rawValue = value
     this._value = convert(value)
@@ -33,4 +34,10 @@ function trackRefValue(ref) {
 }
 export function ref(value) {
   return new RefImpl(value)
+}
+export function isRef(raw) {
+  return !!raw.__v__isRef
+}
+export function unRef(raw) {
+  return isRef(raw) ? raw.value : raw
 }
