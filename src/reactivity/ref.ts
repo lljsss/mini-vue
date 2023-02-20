@@ -35,9 +35,23 @@ function trackRefValue(ref) {
 export function ref(value) {
   return new RefImpl(value)
 }
-export function isRef(raw) {
-  return !!raw.__v__isRef
+export function isRef(ref) {
+  return !!ref.__v__isRef
 }
-export function unRef(raw) {
-  return isRef(raw) ? raw.value : raw
+export function unRef(ref) {
+  return isRef(ref) ? ref.value : ref
+}
+export function proxyRefs(objectWithRefs) {
+  return new Proxy(objectWithRefs, {
+    get(target, key) {
+      return unRef(Reflect.get(target, key))
+    },
+    set(target, key, value) {
+      if (isRef(target[key]) && !isRef(value)) {
+        return (target[key].value = value)
+      } else {
+        return Reflect.set(target, key, value)
+      }
+    },
+  })
 }
