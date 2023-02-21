@@ -6,6 +6,7 @@ describe('computed', () => {
     const user = reactive({
       age: 1,
     })
+    console.log("🚀 ~ file: computed.spec.ts:9 ~ it ~ user:", user)
     const age = computed(() => {
       return user.age
     })
