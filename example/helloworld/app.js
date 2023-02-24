@@ -1,6 +1,8 @@
 import { h } from '../../lib/guid-mini-vue.esm.js'
+import { Foo } from './Foo.js'
 window.self = null
 export const App = {
+  name: 'App',
   render() {
     window.self = this
     return h(
@@ -8,18 +10,29 @@ export const App = {
       {
         id: 'root',
         class: ['red', 'hard'],
-        onClick() {
-          console.log('click')
-        },
-        onMousedown() {
-          console.log('Mousedown')
-        },
+        // onClick() {
+        //   console.log('click')
+        // },
+        // onMousedown() {
+        //   console.log('Mousedown')
+        // },
       },
+      [
+        h('div', {}, 'hi,' + this.msg),
+        h(Foo, {
+          onAdd(a, b) {
+            console.log('onAdd', a, b)
+          },
+          onAddFoo(a, b) {
+            console.log('onAddFoo', a, b)
+          },
+        }),
+      ]
       // [
       //   h('p', { class: 'red' }, 'hi'),
       //   h('p', { class: 'blue' }, 'vue'),
       // ]
-      'hi' + this.msg
+      // 'hi' + this.msg
     )
   },
   setup() {

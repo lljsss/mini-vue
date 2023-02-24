@@ -1,10 +1,18 @@
-import { mutableHandlers, readonlyHandlers, shallowReadonlyHandlers } from './baseHandlers'
+import { isObject } from '../shared/index'
+import {
+  mutableHandlers,
+  readonlyHandlers,
+  shallowReadonlyHandlers,
+} from './baseHandlers'
 import { track, trigger } from './effect'
 export const enum ReactiveFlags {
   IS_REACTIVE = '__v__isReactive',
   IS_READONLY = '__v__isReadonly',
 }
 function createReactiveObject(target, baseHandlers) {
+  if (!isObject(target)) {
+    console.warn(`target ${target} 必须是一个对象`)
+  }
   return new Proxy(target, baseHandlers)
 }
 
