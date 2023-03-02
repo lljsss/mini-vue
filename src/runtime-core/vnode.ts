@@ -1,18 +1,23 @@
 import { ShapeFlages } from '../shared/ShapeFlags'
 
-export function createVNode(type, props?, childern?) {
+export function createVNode(type, props?, children?) {
   const vnode = {
     type,
     props,
     shapeFlag: getShapeFlag(type),
-    childern,
+    children,
     el: null,
   }
   // children
-  if (typeof childern === 'string') {
+  if (typeof children === 'string') {
     vnode.shapeFlag |= ShapeFlages.TEXT_CHILDREN
-  } else if (Array.isArray(childern)) {
+  } else if (Array.isArray(children)) {
     vnode.shapeFlag |= ShapeFlages.ARRAY_CHILDREN
+  }
+  if (vnode.shapeFlag & ShapeFlages.STATEFUAL_COMPONENT) {
+    if (typeof children === 'object') {
+      vnode.shapeFlag |= ShapeFlages.SLOT_CHILDREN
+    }
   }
   return vnode
 }

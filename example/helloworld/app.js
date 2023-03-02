@@ -1,7 +1,7 @@
 import { h } from '../../lib/guid-mini-vue.esm.js'
 import { Foo } from './Foo.js'
 window.self = null
-export const App = {
+/* export const App = {
   name: 'App',
   render() {
     window.self = this
@@ -39,5 +39,24 @@ export const App = {
     return {
       msg: 'mini-vue',
     }
+  },
+} */
+export const App = {
+  name: 'App',
+  render() {
+    const app = h('div', {}, 'App')
+    const foo = h(
+      Foo,
+      {},
+      {
+        header: ({ age }) => h('p', {}, '123' + age),
+        footer: () => h('p', {}, '456'),
+      }
+      // h('p', {}, '123')
+    )
+    return h('div', {}, [app, foo])
+  },
+  setup() {
+    return {}
   },
 }

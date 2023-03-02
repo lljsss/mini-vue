@@ -1,5 +1,5 @@
-import { h } from '../../lib/guid-mini-vue.esm.js'
-export const Foo = {
+import { h, renderSlots } from '../../lib/guid-mini-vue.esm.js'
+/* export const Foo = {
   setup(props, { emit }) {
     // console.log(props)
     // // readonly
@@ -24,5 +24,20 @@ export const Foo = {
     )
     const foo = h('p', {}, 'foo')
     return h('div', {}, [foo, btn])
+  },
+} */
+export const Foo = {
+  setup() {
+    return {}
+  },
+  render() {
+    const foo = h('p', {}, 'foo')
+    console.log(this.$slots)
+    const age = 18
+    return h('div', {}, [
+      renderSlots(this.$slots, 'header', { age }),
+      foo,
+      renderSlots(this.$slots, 'footer'),
+    ])
   },
 }

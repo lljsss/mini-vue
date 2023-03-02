@@ -21,10 +21,10 @@ function processElement(vnode: any, container: any) {
 }
 function mountElement(vnode: any, container: any) {
   const el = (vnode.el = document.createElement(vnode.type))
-  const { childern, shapeFlag } = vnode
+  const { children, shapeFlag } = vnode
   if (shapeFlag & ShapeFlages.TEXT_CHILDREN) {
     // text_children
-    el.textContent = childern
+    el.textContent = children
   } else if (shapeFlag & ShapeFlages.ARRAY_CHILDREN) {
     // array-children
     mountChildren(vnode, el)
@@ -44,7 +44,7 @@ function mountElement(vnode: any, container: any) {
   container.appendChild(el)
 }
 function mountChildren(vnode, el) {
-  vnode.childern.forEach((v) => {
+  vnode.children.forEach((v) => {
     patch(v, el)
   })
 }
